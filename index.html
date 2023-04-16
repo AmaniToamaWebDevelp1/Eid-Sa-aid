@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fireworks Animation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=El+Messiri&display=swap');
+        body{
+            background-color: darkslategrey;
+            font-family: 'El Messiri', sans-serif;
+            color: aliceblue;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+
+        }
+        div{
+            margin-top: 70px;
+            width: 350px;
+            height: 400px;
+        }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      .firework {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #f60;
+        animation: firework 1s ease-in-out forwards;
+      }
+
+      .explosion {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #f60;
+        animation: explosion 0.3s ease-in-out forwards;
+      }
+
+      @keyframes firework {
+        from {
+          transform: scale(0);
+          opacity: 1;
+        }
+        to {
+          transform: scale(10);
+          opacity: 0;
+        }
+      }
+
+      @keyframes explosion {
+        from {
+          transform: scale(0);
+          opacity: 1;
+        }
+        to {
+          transform: scale(3);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      // Set the canvas size to match the window size
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Listen for window resize events and update the canvas size
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      // Create a new firework every second
+      setInterval(() => {
+        const firework = document.createElement("div");
+        firework.classList.add("firework");
+        firework.style.left = Math.random() * canvas.width + "px";
+        firework.style.top = Math.random() * canvas.height + "px";
+        document.body.appendChild(firework);
+
+        // After 1 second, explode the firework
+        setTimeout(() => {
+          const explosion = document.createElement("div");
+          explosion.classList.add("explosion");
+          explosion.style.left = firework.style.left;
+          explosion.style.top = firework.style.top;
+          document.body.appendChild(explosion);
+
+          // Remove the firework and explosion after the explosion animation is finished
+          setTimeout(() => {
+            firework.remove();
+            explosion.remove();
+          }, 300);
+        }, 1000);
+      }, 1000);
+    </script>
+
+    <div>
+       <h1>عيد سعيد </h1>
+       <h3>كل عام وأنتم بخير</h3>
+       <h6>Amani Toama &hearts;</h6>
+    </div>
+    
+  </body>
+</html>
